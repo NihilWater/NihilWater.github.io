@@ -1,29 +1,23 @@
 {
   "files": {
-    "main.css": "./static/css/main.f18b9989.chunk.css",
-    "main.js": "./static/js/main.eebd5224.chunk.js",
-    "main.js.map": "./static/js/main.eebd5224.chunk.js.map",
-    "runtime-main.js": "./static/js/runtime-main.2c371157.js",
-    "runtime-main.js.map": "./static/js/runtime-main.2c371157.js.map",
-    "static/js/2.4acbaa39.chunk.js": "./static/js/2.4acbaa39.chunk.js",
-    "static/js/2.4acbaa39.chunk.js.map": "./static/js/2.4acbaa39.chunk.js.map",
-    "static/js/3.dde611a9.chunk.js": "./static/js/3.dde611a9.chunk.js",
-    "static/js/3.dde611a9.chunk.js.map": "./static/js/3.dde611a9.chunk.js.map",
+    "main.css": "./static/css/main.569fe8bf.css",
+    "main.js": "./static/js/main.61b7f474.js",
+    "static/js/787.f767318e.chunk.js": "./static/js/787.f767318e.chunk.js",
+    "static/media/idx_main.png": "./static/media/idx_main.c0dea242e3cd10963638.png",
+    "static/media/bg.jpg": "./static/media/bg.aa8c1df54aa617338417.jpg",
+    "static/media/mix.ttf": "./static/media/mix.797a915ea473cc6b89b7.ttf",
+    "static/media/idx_back.jpg": "./static/media/idx_back.7955afa29c390904a5db.jpg",
+    "static/media/head_img.png": "./static/media/head_img.4de2b5cd905a297d1127.png",
+    "static/media/wechat.jpg": "./static/media/wechat.020142755c8070b3dd62.jpg",
+    "static/media/qq.jpg": "./static/media/qq.470357ac63fa5d2cf6bc.jpg",
+    "static/media/nw_wt.png": "./static/media/nw_wt.e4513fcdcefd7ba3cd7f.png",
     "index.html": "./index.html",
-    "static/css/main.f18b9989.chunk.css.map": "./static/css/main.f18b9989.chunk.css.map",
-    "static/js/2.4acbaa39.chunk.js.LICENSE.txt": "./static/js/2.4acbaa39.chunk.js.LICENSE.txt",
-    "static/media/index.scss": "./static/media/mix.797a915e.ttf",
-    "static/media/host_info.scss": "./static/media/head_img.4de2b5cd.png",
-    "static/media/idx_back.7955afa2.jpg": "./static/media/idx_back.7955afa2.jpg",
-    "static/media/idx_main.c0dea242.png": "./static/media/idx_main.c0dea242.png",
-    "static/media/nw_wt.e4513fcd.png": "./static/media/nw_wt.e4513fcd.png",
-    "static/media/qq.470357ac.jpg": "./static/media/qq.470357ac.jpg",
-    "static/media/wechat.02014275.jpg": "./static/media/wechat.02014275.jpg"
+    "main.569fe8bf.css.map": "./static/css/main.569fe8bf.css.map",
+    "main.61b7f474.js.map": "./static/js/main.61b7f474.js.map",
+    "787.f767318e.chunk.js.map": "./static/js/787.f767318e.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.2c371157.js",
-    "static/js/2.4acbaa39.chunk.js",
-    "static/css/main.f18b9989.chunk.css",
-    "static/js/main.eebd5224.chunk.js"
+    "static/css/main.569fe8bf.css",
+    "static/js/main.61b7f474.js"
   ]
 }
