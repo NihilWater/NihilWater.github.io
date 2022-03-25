@@ -1,0 +1,15 @@
+<h1>导出专栏</h1>
+<h2>功能介绍</h2>
+<p>本功能让用户将专栏（public/markdown/下的一个文件夹）发布为word。</p>
+<h2>使用流程</h2>
+<h3>请首先安装 pandoc</h3>
+<p>下载链接：<a href="https://www.pandoc.org/installing.html">https://www.pandoc.org/installing.html</a>
+下载完成后需要将pandoc 配置到环境变量中</p>
+<h3>命令</h3>
+<pre class="hljs"><code>node run toword [:name] [:type]
+<span class="hljs-meta prompt_"># </span><span class="language-bash">[:name] 代表是哪个专栏</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">[:<span class="hljs-built_in">type</span>] 代表是哪个类型，比如a和p</span>
+   -- a all 表示打包所有的文章
+   -- p public 表示打包所有公开的文章
+<span class="hljs-meta prompt_"># </span><span class="language-bash">例如 node run toword niswon a</span>
+</code></pre>

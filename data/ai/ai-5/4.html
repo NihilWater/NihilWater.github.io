@@ -5,8 +5,8 @@
 <p>论文链接：<a href="https://openaccess.thecvf.com/content/CVPR2021/html/Tian_BoxInst_High-Performance_Instance_Segmentation_With_Box_Annotations_CVPR_2021_paper.html">https://openaccess.thecvf.com/content/CVPR2021/html/Tian_BoxInst_High-Performance_Instance_Segmentation_With_Box_Annotations_CVPR_2021_paper.html</a></p>
 <p>发布时间: 2020-12 (CVPR 2021)</p>
 <h2>创新点总结</h2>
-<p>提出了一种高性能、仅使用边界框注释进行训练的任务级实例分割。（例如，在COCO数据集上，大幅提高了先前最佳报告的掩码AP 21.1%[12]至31.6%）。核心思想是重新设计实例分割中的学习掩码损失，而不修改分割网络本身。新的lossFunction可以在不依赖掩码注释的情况下监督掩码训练。这可以通过两个损失实现，即：1）一个替代项，该替代项最小化地面真值盒的投影和预测掩模之间的差异；2） 一种成对丢失，它利用了一种先验知识，即具有相似颜色的近端像素很可能具有相同的类别标签。
-<img src="../../../img/article/2021-11-01-10-35-26.png" alt="损失计算过程"></p>
+<p>提出了一种高性能、仅使用边界框注释进行训练的任务级实例分割。（例如，在COCO数据集上，大幅提高了先前最佳报告的掩码AP 21.1%[12]至31.6%）。核心思想是重新设计实例分割中的学习掩码损失，而不修改分割网络本身。新的lossFunction可以在不依赖掩码注释的情况下监督掩码训练。这可以通过两个损失实现，即：1）一个替代项，该替代项最小化地面真值盒的投影和预测掩模之间的差异；2） 一种成对丢失，它利用了一种先验知识，即具有相似颜色的近端像素很可能具有相同的类别标签。</p>
+<p><img src="../../../img/article/2021-11-01-10-35-26.png" alt="损失计算过程"></p>
 <h3>创新点</h3>
 <p>设计了一个更加有效的损失函数，损失函数包含两个部分。</p>
 <blockquote>

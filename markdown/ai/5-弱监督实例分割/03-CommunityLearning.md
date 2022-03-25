@@ -17,6 +17,7 @@
 
 社区学习与多任务学习不同，后者试图在没有参与模块之间紧密互动的情况下平行实现多个目标。
 The community learning is different from multi-task learning that attempts to achieve multiple objectives in parallel without tight interaction between participating modules.
+
 ![](../../../img/article/2021-12-10-14-59-50.png)
 
 
