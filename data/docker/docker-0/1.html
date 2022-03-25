@@ -1,0 +1,64 @@
+<h1>【docker】查询命令</h1>
+<h2>常用命令</h2>
+<table>
+<thead>
+<tr>
+<th>命令功能</th>
+<th>命令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>docker 配置信息</td>
+<td>docker info</td>
+</tr>
+<tr>
+<td>docker 版本</td>
+<td>docker version</td>
+</tr>
+<tr>
+<td>docker 版主</td>
+<td>docker 命令 --help</td>
+</tr>
+<tr>
+<td>镜像列表</td>
+<td>docker images</td>
+</tr>
+<tr>
+<td>镜像搜索</td>
+<td>docker search 镜像名</td>
+</tr>
+<tr>
+<td>正在运行</td>
+<td>docker ps</td>
+</tr>
+<tr>
+<td>容器日志</td>
+<td>docker logs</td>
+</tr>
+</tbody>
+</table>
+<h2>常用位置</h2>
+<p>【docker 配置文件】<code>/etc/docker/daemon.json</code></p>
+<h2>详情</h2>
+<h3>docker images</h3>
+<pre class="hljs"><code>docker images -a  # 查看全部
+docker images -q  # 查看id
+docker images -aq # 查看全部id
+</code></pre>
+<h2>docker ps</h2>
+<pre class="hljs"><code>docker ps [OPTIONS]
+<span class="hljs-meta prompt_"># </span><span class="language-bash">-a     查看全部现运行 + 历史运行过的</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">-n=?   显示最近创建的容器</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">-q     只显示容器的编号</span>
+</code></pre>
+<h3>docker search</h3>
+<pre class="hljs"><code>docker search mysql -f STARS=3000
+</code></pre>
+<h3>docker logs</h3>
+<pre class="hljs"><code>docker logs -tf --tail 10 容器号 # 显示最后10 条log 
+</code></pre>
+<pre class="hljs"><code><span class="hljs-meta prompt_"># </span><span class="language-bash">不断产生日志</span>
+docker run -d centos /bin/sh -c &quot;while true;do echo hello; sleep 1;done&quot;
+<span class="hljs-meta prompt_"># </span><span class="language-bash">查询容器</span>
+</code></pre>

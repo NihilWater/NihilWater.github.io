@@ -1,0 +1,20 @@
+<h1>unity 点击事件</h1>
+<p>对于 3d 场景下物品的点击，需要使用到射线方法。</p>
+<h2>多个重复对象的点击方法</h2>
+<p>【1. 添加Layer】<br />
+给这些重复的物品添加相同的Layer, 这步最好在物品复制之前完成。
+<img src="../../../img/article/2022-02-12-23-08-18.png" alt="添加layer"></p>
+<pre class="hljs"><code>private <span class="hljs-type">void</span> <span class="hljs-title function_">Update</span><span class="hljs-params">()</span>
+{
+    <span class="hljs-keyword">if</span> (Input.GetMouseButtonDown(<span class="hljs-number">0</span>)) {
+        <span class="hljs-keyword">if</span> (EventSystem.current.IsPointerOverGameObject() == <span class="hljs-literal">false</span>) {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            <span class="hljs-type">bool</span> isCollider = Physics.Raycast(ray,out hit,  <span class="hljs-number">1000</span>, LayerMask.GetMask(<span class="hljs-string">&quot;MapCube&quot;</span>));
+            <span class="hljs-keyword">if</span> (isCollider) {
+                GameObject mapCube = hit.collider.gameObject;  <span class="hljs-comment">// 得到点击的 mapCube</span>
+            }
+        }
+    }
+}
+</code></pre>

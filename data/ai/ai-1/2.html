@@ -1,0 +1,20 @@
+<h1>pytorch权重初始化</h1>
+<h2>张量生成</h2>
+<p>【全零张量】</p>
+<pre class="hljs"><code>torch.zeros((a,b,...))
+</code></pre>
+<h2>xavier 初始化</h2>
+<p>pytorch提供了uniform和normal两种</p>
+<p><img src="../../../img/article/2021-11-08-20-06-46.png" alt="">
+使用normalize 进行初始化，随着网络的加深，梯度会消失。
+假设 $ y = ax+b =w1x1+ w2x2 + ... + wnxn + b $</p>
+<p>对于y取方差有 $ var(y) = var(w1x1) + var(w2x1) + var(w2x1) + var(b) = var(y) = N * var(wi) * var(xi)
+所以，kaiming_normal 在初始化的时候让w在的分布都除以了\frac{1}{\sqrt n}$, 来使得通过了全连接层的输出是和X同分布的。</p>
+<h2>kaiming 初始化</h2>
+<p>针对ReLu 激活函数，有一般的输出，会被变成0，为了保持方差不变，会采用kaiming激活函数。在初始化的时候让w在的分布除以了<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mrow><mn>2</mn></mrow><mrow><msqrt><mi>n</mi></msqrt></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{2}{\sqrt n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.845108em;"></span><span class="strut bottom" style="height:1.395108em;vertical-align:-0.5499999999999999em;"></span><span class="base textstyle uncramped"><span class="mord reset-textstyle textstyle uncramped"><span class="sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span><span class="mfrac"><span class="vlist"><span style="top:0.3956959999999998em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:1em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="sqrt mord"><span class="sqrt-sign" style="top:0.02043428571428585em;"><span class="style-wrap reset-scriptstyle scriptstyle uncramped">√</span></span><span class="vlist"><span style="top:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:1.4285714285714286em;">​</span></span><span class="mord mathit">n</span></span><span style="top:-0.722422857142857em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:1.4285714285714286em;">​</span></span><span class="reset-scriptstyle textstyle uncramped sqrt-line"></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:1.4285714285714286em;">​</span></span>​</span></span></span></span></span></span><span style="top:-0.22999999999999998em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:1em;">​</span></span><span class="reset-textstyle textstyle uncramped frac-line"></span></span><span style="top:-0.394em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:1em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathrm">2</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:1em;">​</span></span>​</span></span></span><span class="sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span></span></span></span></span>，就是在原来 xavier 初始化的基础上进行乘了个sqrt(2)。</p>
+<p>【kaiming_normal_】</p>
+\text{std} = \frac{\text{gain}}{\sqrt{\text{fan\_mode}}}
+
+<p>【kaiming_uniform_】</p>
+\text{bound} = \text{gain} \times \sqrt{\frac{3}{\text{fan\_mode}}} 
+

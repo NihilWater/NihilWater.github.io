@@ -1,0 +1,35 @@
+<h1>Pytouch.nn 相关函数对照</h1>
+<h2>nn.Embedding</h2>
+<p>【功能】<br/>
+产生一组存储固定大小的词典的嵌入向量的查找表。
+【初始化】</p>
+<pre class="hljs"><code>embed = torch.nn.Embedding(num_embeddings,embedding_dim)
+</code></pre>
+<blockquote>
+<p>num_embeddings (python:int) – 词典的大小尺寸
+embedding_dim (python:int) – 嵌入向量的维度，即用多少维来表示一个符号。</p>
+</blockquote>
+<p>有时在初始化时会被赋值会伴随着初始化过程。</p>
+<pre class="hljs"><code>self.init_proposal_boxes = nn.Embedding(<span class="hljs-number">300</span>, <span class="hljs-number">4</span>)
+nn.init.constant_(self.init_proposal_boxes.weight[:, :<span class="hljs-number">2</span>], <span class="hljs-number">0.5</span>)
+nn.init.constant_(self.init_proposal_boxes.weight[:, <span class="hljs-number">2</span>:], <span class="hljs-number">1.0</span>)
+</code></pre>
+<p>【使用】<br />
+使用过程中，将<code>embed</code>直接当作向量来是使用即可。</p>
+<h2>nn.MultiheadAttention</h2>
+<p>【功能】<br/>
+产生多头注意力模型
+【初始化】</p>
+<pre class="hljs"><code> self.self_attn = nn.MultiheadAttention(d_model, nhead, dropout=dropout)
+</code></pre>
+<blockquote>
+<p>num_embeddings (python:int) – 词典的大小尺寸
+embedding_dim (python:int) – 嵌入向量的维度，即用多少维来表示一个符号。</p>
+</blockquote>
+<p>有时在初始化时会被赋值会伴随着初始化过程。</p>
+<pre class="hljs"><code>self.init_proposal_boxes = nn.Embedding(<span class="hljs-number">300</span>, <span class="hljs-number">4</span>)
+nn.init.constant_(self.init_proposal_boxes.weight[:, :<span class="hljs-number">2</span>], <span class="hljs-number">0.5</span>)
+nn.init.constant_(self.init_proposal_boxes.weight[:, <span class="hljs-number">2</span>:], <span class="hljs-number">1.0</span>)
+</code></pre>
+<p>【使用】<br />
+使用过程中，将<code>embed</code>直接当作向量来是使用即可。</p>
