@@ -1,0 +1,94 @@
+<h1>申请SSL免费证书</h1>
+<h2>什么是SSL？</h2>
+<h2>如何申请免费SSL证书</h2>
+<blockquote>
+<p><strong>1. 访问网站 https://freessl.cn/</strong></p>
+<p><img src="../../../img/article/2022-03-29-00-57-57.png" alt="">
+在横线上填写自己要声请的域名，点击确定</p>
+</blockquote>
+<blockquote>
+<p><strong>2. 在域名提供商处填写以下字段</strong></p>
+<p>如果以华为云为例，就是下面这样，像添加一个普通的域名解析一样，只不过要注意类型这里要换成CNAME。</p>
+<p><img src="../../../img/article/2022-03-28-23-59-40.png" alt=""></p>
+<p>或者你的界面可能是下面这样，和上面类似</p>
+<p><img src="../../../img/article/2022-03-28-23-52-38.png" alt=""></p>
+<p>填写完成之后，就可以点击验证，就可以看到证书密钥。如果第一次点击没有反应，可能是还没有解析成功，大概两分钟内就会解析成功。</p>
+</blockquote>
+<blockquote>
+<p><strong>3. 配置SSL证书</strong></p>
+<p>在华为云找到云证书管理服务，上传原有证书</p>
+<p><img src="../../../img/article/2022-03-29-00-01-48.png" alt=""></p>
+<p>根据FreeSSL所给出的公私钥信息，填写到华为云相应的位置</p>
+<p><img src="../../../img/article/2022-03-29-00-08-02.png" alt=""></p>
+</blockquote>
+<h2>配置到SpringBoot上</h2>
+<blockquote>
+<p><strong>1. 从云端下载证书到本地</strong>
+在华为云上传证书的界面，你可以看到自己已经上传的证书，其中有一项为下载。点击下载，可以得到证书压缩包。
+<img src="../../../img/article/2022-03-29-00-46-20.png" alt=""></p>
+</blockquote>
+<blockquote>
+<p><strong>2. 解压证书，选择Tomcat</strong></p>
+<p><img src="../../../img/article/2022-03-29-00-48-24.png" alt=""></p>
+<p><img src="../../../img/article/2022-03-29-00-49-39.png" alt=""></p>
+<p>之后将证书放入Springboot的resource里</p>
+<p><img src="../../../img/article/2022-03-29-00-50-38.png" alt=""></p>
+</blockquote>
+<blockquote>
+<p><strong>3. 在application.properties中加入以下内容</strong></p>
+</blockquote>
+<pre class="hljs"><code>server.port=443
+server.ssl.key-store=classpath:******_ecologicalcreation.com.cn_server.jks # 修改为自己的证书
+server.ssl.key-store-password=密码 # 在Tomcat那个文件夹里的 **** _keystorePass.txt
+server.ssl.key-store-type= JKS
+</code></pre>
+<blockquote>
+<p><strong>4. 在SpringBoot的入口文件写入如下内容</strong></p>
+</blockquote>
+<pre class="hljs"><code><span class="hljs-keyword">package</span> com.example.demo;
+
+<span class="hljs-keyword">import</span> org.apache.catalina.Context;
+<span class="hljs-keyword">import</span> org.apache.catalina.connector.Connector;
+<span class="hljs-keyword">import</span> org.apache.coyote.http11.Http11NioProtocol;
+<span class="hljs-keyword">import</span> org.apache.tomcat.util.descriptor.web.SecurityCollection;
+<span class="hljs-keyword">import</span> org.apache.tomcat.util.descriptor.web.SecurityConstraint;
+<span class="hljs-keyword">import</span> org.springframework.boot.SpringApplication;
+<span class="hljs-keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;
+<span class="hljs-keyword">import</span> org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+<span class="hljs-keyword">import</span> org.springframework.boot.web.servlet.server.ServletWebServerFactory;
+<span class="hljs-keyword">import</span> org.springframework.context.annotation.Bean;
+
+<span class="hljs-meta">@SpringBootApplication</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DemoApplication</span> {
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
+        SpringApplication.run(DemoApplication.class, args);
+    }
+
+    <span class="hljs-meta">@Bean</span>
+    <span class="hljs-keyword">public</span> ServletWebServerFactory <span class="hljs-title function_">servletWebServerFactory</span><span class="hljs-params">()</span> {
+        <span class="hljs-type">TomcatServletWebServerFactory</span> <span class="hljs-variable">factory</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TomcatServletWebServerFactory</span>() {
+            <span class="hljs-meta">@Override</span>
+            <span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">postProcessContext</span><span class="hljs-params">(Context context)</span> {
+                <span class="hljs-type">SecurityConstraint</span> <span class="hljs-variable">securityConstraint</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SecurityConstraint</span>();
+                securityConstraint.setUserConstraint(<span class="hljs-string">&quot;CONFIDENTIAL&quot;</span>);
+                <span class="hljs-type">SecurityCollection</span> <span class="hljs-variable">securityCollection</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SecurityCollection</span>();
+                securityCollection.addPattern(<span class="hljs-string">&quot;/*&quot;</span>);
+                securityConstraint.addCollection(securityCollection);
+                context.addConstraint(securityConstraint);
+            }
+        };
+        factory.addAdditionalTomcatConnectors(redirectConnector());
+        <span class="hljs-keyword">return</span> factory;
+    }
+
+    <span class="hljs-keyword">private</span> Connector <span class="hljs-title function_">redirectConnector</span><span class="hljs-params">()</span> {
+        <span class="hljs-type">Connector</span> <span class="hljs-variable">connector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Connector</span>(Http11NioProtocol.class.getName());
+        connector.setScheme(<span class="hljs-string">&quot;http&quot;</span>);
+        connector.setPort(<span class="hljs-number">80</span>);
+        connector.setSecure(<span class="hljs-literal">false</span>);
+        <span class="hljs-keyword">return</span> connector;
+    }
+}
+
+</code></pre>

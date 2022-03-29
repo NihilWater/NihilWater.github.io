@@ -1,12 +1,19 @@
-<h1>图卷积神经网络</h1>
-<h2>意义</h2>
-<p>使用神经网络来表达一张图上的信息。图相较于其他的数据结构，存在更加明显的结构特性。一张图的信息包含有4个方面，顶点的信息，边的信息，图整体的信息，图的连接信息。如今，大部分GNN在做的事情就是以一张图片的这些信息作为输入，得到一张输出图，输出图的结构信息与原图一样，但是顶点信息，边信息，整张图的信息表达会发生改变。</p>
-<h2>信息的表达</h2>
-<p>对于顶点信息，我们可以使用一个向量来进行表示。</p>
-<p>对于每一条边，我们同样可以使用一个向量来表示。
-对于全局信息，我们可以使用所有点的均值与所有边的均值进行表示，也可以使用一个和全部节点相连接的伪节点进行信息的表达。
-对于连接性，我们可以使用邻接表或者邻接矩阵来表示。</p>
-<h2>案例说明</h2>
-<p>【顶点分类问题】：已知一张图上有若干节点，需要对这些节点进行分类。
-① 最简单的方式，可能我们已经有了节点的向量表达，所以只需要对每个节点做一次全连接+softmax之类的分类网络就可以表示信息了。
-② 信息转化，假设顶点没有合理的向量表达，或者表达能力较弱，我们可以用边的</p>
+<h1>全局平均池化 与 类激活图</h1>
+<h2>信息</h2>
+<p>类激活图:<a href="https:://arxiv.org/pdf/1512.04150.pdf">https:://arxiv.org/pdf/1512.04150.pdf</a></p>
+<p>文章链接：<a href="https:://arxiv.org/pdf/1512.04150.pdf">https:://arxiv.org/pdf/1512.04150.pdf</a></p>
+<p>发表时间：2015-12</p>
+<h2>背景</h2>
+<h2>创新点简介</h2>
+<p>全连接的出现（左图），让每一个特征图节点和最终的输出节点产生联系，这种联系和注意力机制一样，会产生空间信息的丢失，于是便提出了全局均匀池化的概念，让模型输出某个类的概率之和某一层特征图有关。（使每一层特征输出的均值作为最后结果）</p>
+<p><img src="../../../img/article/2021-12-04-12-33-29.png" alt=""></p>
+<h2>详细内容</h2>
+<h3>模型结构</h3>
+<h2>引用</h2>
+<blockquote>
+<p>although image-level class labels indicate only the exis-tence of object classes, they can be used to derive strongcues for instance segmentation, called Class Attention Maps(CAMs) [37, 43, 45, 49]. A CAM roughly estimates areasof each class by investigating the contribution of local im-age regions to the classification score of the class. How-ever, CAMs cannot be directly utilized as supervision forinstance segmentation since they have limited resolution,often highlight only partial areas of objects, and most im-portantly, cannot distinguish different instances of the sameclass. To resolve this issue, a recent approach [50] incor-porates CAMs with an off-the-shelf segmentation proposaltechnique [2], which however has to be trained separatelyon an external dataset with additional supervision.</p>
+</blockquote>
+<p>[37] M. Oquab, L. Bottou, I. Laptev, and J. Sivic. Is object lo-calization for free? - weakly-supervised learning with con-volutional neural networks. In Proc. IEEE Conference onComputer Vision and Pattern Recognition (CVPR), 2015.<br/>
+[43] R. R. Selvaraju, M. Cogswell, A. Das, R. Vedantam,D. Parikh, and D. Batra. Grad-cam: Visual explanationsfrom deep networks via gradient-based localization. In Proc.IEEE Conference on Computer Vision and Pattern Recogni-tion (CVPR), 2017.<br/>
+[45] Y. Wei, J. Feng, X. Liang, M.-M. Cheng, Y. Zhao, and S. Yan.Object region mining with adversarial erasing: A simpleclassification to semantic segmentation approach. In Proc.IEEE Conference on Computer Vision and Pattern Recogni-tion (CVPR), 2017.<br/>
+[49] B. Zhou, A. Khosla, A. Lapedriza, A. Oliva, and A. Tor-ralba. Learning deep features for discriminative localization.In Proc. IEEE Conference on Computer Vision and PatternRecognition (CVPR), 2016.<br/></p>

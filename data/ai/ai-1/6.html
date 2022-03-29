@@ -1,0 +1,8 @@
+<h1>pytorch 可视化</h1>
+<h2>图片可视化</h2>
+<pre class="hljs"><code><span class="hljs-keyword">from</span> matplotlib <span class="hljs-keyword">import</span> pyplot <span class="hljs-keyword">as</span> plt
+image = $image.cpu().clone()  <span class="hljs-comment"># detach().numpy() 这里的 $image 要换成自己的变量名</span>
+<span class="hljs-comment"># image = image.permute(1,2,0)    # 这个是可选的，主要是要将图片的维度调正为(w, h, c)的形式</span>
+plt.imshow(image)  <span class="hljs-comment"># 准备图片</span>
+plt.show()  <span class="hljs-comment"># 展示图片</span>
+</code></pre>

@@ -1,12 +1,3 @@
-<h1>DETR</h1>
-<h2>信息</h2>
-<p>论文标题：End-to-End Object Detection with Transformers</p>
-<p>论文链接：<a href="https://arxiv.org/abs/2005.12872">https://arxiv.org/abs/2005.12872</a></p>
-<p>发表时间：2020-05</p>
-<h2>创新</h2>
-<p>DETR提出使用transformer，学习固定个数目标编码作为解码器的Q，来去除非极大化抑制的影响。具体来说首先使用CNN提取特征，然后将特征输入transformer的编码层，得到解码器的K和V，之后传入解码器，结合目标编码，产生解码结果，后通过MLP，映射到每一个对象的类别和边界框。和Faster RCNN转化为Mask RCNN一样，加入了mask head的DETR实现了分割任务。</p>
-<p><img src="../../../img/article/2022-03-11-16-20-09.png" alt=""></p>
-<h2>详情</h2>
-<p><img src="../../../img/article/2022-03-11-16-05-44.png" alt=""></p>
-<p>使用DETR进行实例分割</p>
-<p><img src="../../../img/article/2022-03-12-13-57-07.png" alt=""></p>
+<h1>Vision Transformers Learn without Natural Images</h1>
+<h2>摘要</h2>
+<p>【函数驱动的监督学习】使用了 FDSL,(Formula-Driven Supervised Learning)函数驱动的监督学习。先前的FDSL主要是产生了形状不同的形状的图形的物体，进行训练。在本文中作者又引入了颜色和斑块来进行训练。</p>

@@ -1,15 +1,17 @@
-<h1>【实例分割】Semantic Instance Segmentation via Deep Metric Learning</h1>
+<h1>Sparse RCNN</h1>
 <h2>信息</h2>
-<p>文章链接：<a href="https://arxiv.org/abs/1703.10277">https://arxiv.org/abs/1703.10277</a></p>
-<p>发表时间：2017-10</p>
-<h2>创新点简介</h2>
-<p>本文使用先计算出两个像素属于同一个目标的可能性后再聚类的方式，完成实例分割任务。<code>【论文原句】first computing how likely two pixels are to belong to the same object, and then by grouping similar pixels together</code>。具体来说论文使用全卷积的模型计算出相似度矩阵，然后通过“种子点”聚类相似像素。这些 “种子点” 是由一个全卷积网络训练出来的。</p>
-<h2>详细内容</h2>
-<h3>模型结构</h3>
-<p><img src="../../../img/article/2022-02-25-15-11-58.png" alt="">
-上文所说的低层信息，就是这里从骨干和FPN输出中提取出来的<code>Bases</code>，而所谓高层特征则是通过了一个个又通过了Tower之后又经过<code>Boxes Attns</code>模块的信息，他们通过Blender进行相乘，然后相加融合，最终的输出。<br/></p>
-<p><img src="../../../img/article/2022-02-25-15-18-41.png" alt="">
-这里左图对<code>Bases</code>进行了可视化，而右图对<code>Boxes Attns</code>结果进行了可视化，将对应颜色的<code>attention</code> 和 <code>Base</code>进行相乘，让后相加就可以得到最后结果。<br/></p>
-<p><img src="../../../img/article/2022-02-25-15-52-35.png" alt=""></p>
-<h3>训练与评估</h3>
-<p>训练时，通过标签的边界框就可以完成对于每一个实例的区分，而对于评估过程，作者使用FCOS 的预测结果。</p>
+<p>论文题目：Sparse R-CNN: End-to-End Object Detection with Learnable Proposals</p>
+<p>论文链接：<a href="https://arxiv.org/abs/2011.12450">https://arxiv.org/abs/2011.12450</a></p>
+<p>发表时间：2020-11</p>
+<h2>创新</h2>
+<p>使用可学习的100-300个边框来取代RPN（区域建议网络），实现了一个完全稀疏的端到端目标检测网络。</p>
+<h2>详情</h2>
+<h3>稀疏和密集</h3>
+<p><img src="../../../img/article/2022-03-15-15-25-43.png" alt=""></p>
+<p>作者指出以前的目标检测都是每个特征像素做的，采用了“anchor boxes”机制，这会有十分密集的目标框（HWk个）产生，Faster RCNN 使用NMS筛选值的计算分类和边框回归的建议框，让一个密集的检测变得稀疏起来，但他仍然不能算是一个完全稀疏的目标检测方法（图b）。而本文作者所提出的Sparse RCNN则使用学习来的N(100或300)个RPN（可以理解为在训练集上的统计出了最可能出现目标的位置）直接进行分类和回归，是一个从始至终稀疏的模型。</p>
+<h3>DETR</h3>
+<p>DETR 使用了100个固定大小的object queries来完成目标的确定，但是其每一个object queries都要与特征层的每一个像素进行交互，作者认为这是一种密集的操作，带来的结果是训练过程的十分的漫长，（个人感觉，这里也有使用transformer的原因）</p>
+<p><img src="../../../img/article/2022-03-12-13-59-28.png" alt=""></p>
+<p>如上图所示，对于DETR，它通过设置一个长采样卷积结构完成对于实例mask的获取</p>
+<p><img src="../../../img/article/2022-03-12-13-58-55.png" alt=""></p>
+<p><img src="../../../img/article/2022-03-12-14-03-40.png" alt=""></p>

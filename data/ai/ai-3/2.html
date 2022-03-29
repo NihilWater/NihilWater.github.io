@@ -1,37 +1,16 @@
-<h1>MaskRCNN</h1>
+<h1>MEInst</h1>
 <h2>信息</h2>
-<p>文章标题：</p>
-<p>文章链接：<a href="https://arxiv.org/pdf/1703.06870">Mask_RCNN</a></p>
-<p>发表时间：2017-03</p>
+<p>文章标题：Mask Encoding for Single Shot Instance Segmentation</p>
+<p>文章链接：<a href="https://arxiv.org/abs/2003.11712">https://arxiv.org/abs/2003.11712</a></p>
+<p>发表时间：2020-03</p>
 <h2>背景</h2>
+<p>本文采用了紧凑掩膜编码，来进行单阶段实例分割任务，任务表面，使用了紧凑掩膜，对小目标的分割的效果相较二阶段无紧密掩膜的有较大提高，但对大目标，精度会少许的损失。</p>
 <h2>创新点简介</h2>
-<p>MaskRCNN在FastRCNN的基础上加入了对于实例掩膜的预测分支，通过bounding box回归检测出每一个物品之后，再对回归框中的每一个像素进行分类，完成语义分割。这样的就实现了实例分割，即<code>目标检测+语义分割=实力分割</code>！</p>
+<p>论文中指出，决定一个目标掩膜的关键像素主要分布在一个实例的边缘，而实例中占有大面积的部分是图像的主体部分，导致了信息的冗余。所以需要进行编码处理。</p>
+<blockquote>
+<p>The discriminative pixels are mainly distributed along the object boundaries while most pixels in its body hold the properties of being category-continuous and category-consistent. In other words, the existing mask representations contains redundant information and it may be highly compressed with negligible loss.</p>
+</blockquote>
 <h2>详细内容</h2>
-<h3>实例分支训练</h3>
-<p>训练时，通过当前得到的真实mask中的类别class_id，遍历所有的预测mask，找到class_id类别所对应的预测mask(前向传播中介绍过每个类别都有一个预测mask)，比较真实mask与预测mask每个像素点信息，用的是binary_cross_entropy二分类交叉熵损失函数
-<img src="../../../img/article/2021-10-30-13-42-24.png" alt=""></p>
-<p><strong>实例分割</strong>
-<img src="../../../img/article/2021-11-03-14-30-11.png" alt=""></p>
-<p><img src="../../../img/article/2021-11-03-15-36-20.png" alt=""></p>
-<h3>实例分预测</h3>
-<p><img src="../../../img/article/2021-11-03-15-35-57.png" alt=""></p>
-<h3>问题</h3>
-<ol>
-<li>边框回归的精度会影响到实例分割的结果
-<img src="../../../img/article/2021-10-30-14-06-25.png" alt=""></li>
-</ol>
-<p>解决方案<a href="https://zhuanlan.zhihu.com/p/121839698?from_voters_page=true">无论region有多大，我们都去在全图范围内预测（whole image）</a>
-<img src="../../../img/article/2021-11-03-15-40-45.png" alt=""></p>
-<ol start="2">
-<li>高度遮罩问题
-<img src="../../../img/article/2021-11-03-15-06-48.png" alt=""></li>
-</ol>
-<p>解决方案<a href="https://zhuanlan.zhihu.com/p/359610583">Deep Occlusion-Aware Instance Segmentation with Overlapping BiLayers</a>
-引入GCN，实现对于遮罩物体和被遮罩物体的检测</p>
-<ol start="3">
-<li>分割边缘粗糙
-<img src="../../../img/article/2021-11-03-15-08-52.png" alt=""></li>
-</ol>
-<p>解决方案<a href="https://zhuanlan.zhihu.com/p/394526376">Look Closer to Segment Better:Boundary Patch Refinement for Instance Segmentation</a></p>
-<h3>【补充】为什么上面7*7的特征图</h3>
-<p><img src="../../../img/article/2021-11-03-14-26-09.png" alt=""></p>
+<h3>Encoder 和 Decoder 的生成</h3>
+<p>这里会先通过Mask来直接训练编解码矩阵（压缩矩阵），而在后面的模型训练中，就不在改变之前训练好的编解码矩阵了。编解码矩阵的训练方法是<code>PCA</code>(主成分分析)使用的包是<code>sklearn.decomposition import IncrementalPCA</code>（为什么用<code>PCA</code>:作者在文中提到，我们将二维的数据变成了一维，这与主成分分析压缩很有关系，如下图，就看将一个二维数据，压缩到一维，而我们需要保留的就是中心，和方向）</p>
+<p><img src="../../../img/article/2021-12-03-16-00-40.png" alt=""></p>
