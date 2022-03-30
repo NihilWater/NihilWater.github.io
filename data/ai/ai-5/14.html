@@ -1,10 +1,14 @@
-<h1>BPR微调框</h1>
+<h1>CondInst</h1>
 <h2>信息</h2>
-<p>文章标题：Look Closer to Segment Better: Boundary Patch Refinement for Instance Segmentation</p>
-<p>文章链接：<a href="https://arxiv.org/abs/2104.05239">https://arxiv.org/abs/2104.05239</a></p>
-<p>发表时间：2021-04</p>
+<p>文章标题：Conditional Convolutions for Instance Segmentation</p>
+<p>文章链接：<a href="https://arxiv.org/abs/2003.05664">https://arxiv.org/abs/2003.05664</a></p>
+<p>发表时间：2020-03</p>
 <h2>背景</h2>
-<p>在实例分割任务中，由于特征图的空间分辨率低，以及边界像素比例极低造成的不平衡问题，使得预测的实例掩码的边界通常是不精确的。</p>
 <h2>创新点简介</h2>
-<p><img src="../../../img/article/2022-03-22-16-30-46.png" alt=""></p>
-<p>本文提出一个后处理 refinement 框架：BPR，用来改善基于任何实例分割模型结果的边界质量。BPR 在 Cityscapes 基准上比 Mask R-CNN 基线有明显的改进，特别是在边界感知指标上。此外，通过将 BPR 框架应用于 PolyTransform + SegFix 基线，在 Cityscapes 的排行榜上达到了第一名。</p>
+<p>CondInst 在全卷积网络FCOS的基础上通过引入条件卷积，完成了对于实例分割任务的实现。Condinst completes the task of instance segmentation by introducing conditional convolution on the basis of full convolution network fcos.</p>
+<h2>详细内容</h2>
+<h3>模型结构</h3>
+<p><img src="../../../img/article/2021-12-01-23-34-22.png" alt=""></p>
+<h3>条件卷积细节</h3>
+<p>在计算边框和中心度分支的同级，引入条件卷积分支（一个3X3的卷积），输出结果为每一个特征像素*169的特征层，其中169 = （80+64+8）+（8+8+1）。表示三个卷积。前三个数是动态卷积的w，后三个数是动态卷积的偏置。特征层通过三个卷积得到最终输出的Mask</p>
+<h2>引用</h2>

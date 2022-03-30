@@ -11,5 +11,5 @@ Error: Failed to download metadata for repo 'AppStream': Cannot download repomd.
 ```
 
 【解决方案】
-请参考：https://blog.csdn.net/linzi19900517/article/details/122846919
+请参考：[https://blog.csdn.net/linzi19900517/article/details/122846919](https://blog.csdn.net/linzi19900517/article/details/122846919)
 

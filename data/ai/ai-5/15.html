@@ -1,12 +1,10 @@
-<h1>ZSI</h1>
+<h1>BPR微调框</h1>
 <h2>信息</h2>
-<p>文章标题：Zero-Shot Instance Segmentation</p>
-<p>文章链接：<a href="https://arxiv.org/abs/2104.06601">https://arxiv.org/abs/2104.06601</a></p>
+<p>文章标题：Look Closer to Segment Better: Boundary Patch Refinement for Instance Segmentation</p>
+<p>文章链接：<a href="https://arxiv.org/abs/2104.05239">https://arxiv.org/abs/2104.05239</a></p>
 <p>发表时间：2021-04</p>
 <h2>背景</h2>
+<p>在实例分割任务中，由于特征图的空间分辨率低，以及边界像素比例极低造成的不平衡问题，使得预测的实例掩码的边界通常是不精确的。</p>
 <h2>创新点简介</h2>
-<p>通过类间关系，可以推测出没有见过的类。如下图，刀是学习过的，但是叉子没有学习过，它推理出来了。</p>
-<p><img src="../../../img/article/2021-12-13-17-25-44.png" alt=""></p>
-<h2>详细内容</h2>
-<h3>模型结构</h3>
-<h2>引用</h2>
+<p><img src="../../../img/article/2022-03-22-16-30-46.png" alt=""></p>
+<p>本文提出一个后处理 refinement 框架：BPR，用来改善基于任何实例分割模型结果的边界质量。BPR 在 Cityscapes 基准上比 Mask R-CNN 基线有明显的改进，特别是在边界感知指标上。此外，通过将 BPR 框架应用于 PolyTransform + SegFix 基线，在 Cityscapes 的排行榜上达到了第一名。</p>
