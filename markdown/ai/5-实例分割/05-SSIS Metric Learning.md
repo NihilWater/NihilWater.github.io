@@ -1,6 +1,6 @@
 # 【实例分割】Semantic Instance Segmentation via Deep Metric Learning
 
-## 信息
+## 基础信息
 文章标题 Semantic Instance Segmentation via Deep Metric Learning
 
 文章链接：[https://arxiv.org/abs/1703.10277](https://arxiv.org/abs/1703.10277)

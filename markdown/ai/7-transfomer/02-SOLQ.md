@@ -1,6 +1,6 @@
 # SOLQ
 
-## 信息
+## 基础信息
 
 论文题目：SOLQ: Segmenting Objects by Learning Queries
 

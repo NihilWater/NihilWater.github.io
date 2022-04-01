@@ -1,6 +1,6 @@
 # DETR
 
-## 信息
+## 基础信息
 
 论文标题：End-to-End Object Detection with Transformers
 

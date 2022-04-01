@@ -1,6 +1,6 @@
 # BPR微调框
 
-## 信息
+## 基础信息
 
 文章标题：Look Closer to Segment Better: Boundary Patch Refinement for Instance Segmentation
 

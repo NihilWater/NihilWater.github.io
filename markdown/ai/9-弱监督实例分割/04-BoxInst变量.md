@@ -1,7 +1,7 @@
 # BoxInst 变量
 本文简单介绍BoxInst 模型中所使用到的关键变量
 
-## 信息
+## 基础信息
 
 论文标题: BoxInst: High-Performance Instance Segmentation with Box Annotations
 

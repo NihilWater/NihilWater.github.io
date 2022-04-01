@@ -1,6 +1,6 @@
 # PrototypicalNet
 
-## 信息
+## 基础信息
 
 文章标题：Prototypical Networks for Few-shot Learning
 

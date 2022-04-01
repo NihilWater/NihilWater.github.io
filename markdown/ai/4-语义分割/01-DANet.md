@@ -1,6 +1,6 @@
 # DANet 
 
-## 信息
+## 基础信息
 
 文章标题：Dual Attention Network for Scene Segmentation
 

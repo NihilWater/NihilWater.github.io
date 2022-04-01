@@ -1,6 +1,6 @@
 # ISTR
 
-## 信息 
+## 基础信息 
 文章链接：[https://arxiv.org/abs/2105.00637](https://arxiv.org/abs/2105.00637)
 
 发表时间：2021-05

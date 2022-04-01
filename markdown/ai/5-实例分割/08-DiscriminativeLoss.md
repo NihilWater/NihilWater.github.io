@@ -1,6 +1,6 @@
 # Discriminative Loss
 
-## 信息
+## 基础信息
 
 文章标题：Semantic Instance Segmentation with a Discriminative Loss Function
 
@@ -36,10 +36,12 @@
 
 $$L_{var}=\frac{1}{C}\sum_{c=1}^c\frac{1}{N_c}\sum_{i=1}^{N_c}(||\mu_c -x_i|| -\delta_v)_{+}^2$$
 
-$$L_{dist}=\frac{1}{C(C-1)}{\sum_{C_A=1}^C\sum_{C_B=1}^C}_{C_A\not ={C_B}}[2\delta_d -||\mu_{c_A} - \mu_{c_B}||]_{+}^2$$
+<!-- $$L_{dist}=\frac{1}{C(C-1)}\underset{C_A\not =C_B}{\sum_{C_A=1}^C\sum_{C_B=1}^C}[2\delta_d -||\mu_{c_A} - \mu_{c_B}||]_{+}^2$$ -->
+
+
+$$L_{dist}=\frac{1}{C(C-1)}\sum_{C_A=1}^C\sum_{C_B=1 \& C_A \neq C_B}^C[2\delta_d -||\mu_{c_A} - \mu_{c_B}||]_{+}^2$$
 
 $$L_{reg} = \frac{1}{C}\sum_{c=1}^C||\mu_c||$$
-
 
 ### 效果
 以城市景观为例。1行与第3行对比表示语义分割的质量对聚类性能有很大的影响。第1行比第2行和第3行比第4行:聚类方法的效果不太明显，但也有改进的空间。

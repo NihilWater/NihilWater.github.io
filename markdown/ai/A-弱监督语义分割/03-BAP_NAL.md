@@ -1,6 +1,6 @@
 # BAP_NAL
 
-## 信息
+## 基础信息
 
 文章标题：Background-Aware Pooling and Noise-Aware Loss forWeakly-Supervised Semantic Segmentation
 

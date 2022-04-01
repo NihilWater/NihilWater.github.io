@@ -1,6 +1,6 @@
 # InstanceFCN
 
-## 信息
+## 基础信息
 
 文章标题：Instance-sensitive Fully Convolutional Networks
 

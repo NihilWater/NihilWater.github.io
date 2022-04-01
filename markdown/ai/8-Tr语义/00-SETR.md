@@ -1,6 +1,6 @@
 # SETR
 
-## 信息
+## 基础信息
 
 论文题目：Rethinking Semantic Segmentation from a Sequence-to-Sequence Perspective with Transformers
 

@@ -1,6 +1,6 @@
 # 全局平均池化 与 类激活图
 
-## 信息
+## 基础信息
 
 类激活图:[https:://arxiv.org/pdf/1512.04150.pdf](https:://arxiv.org/pdf/1512.04150.pdf)
 

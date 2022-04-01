@@ -1,6 +1,6 @@
 # Sparse RCNN
 
-## 信息
+## 基础信息
 
 论文题目：Sparse R-CNN: End-to-End Object Detection with Learnable Proposals
 

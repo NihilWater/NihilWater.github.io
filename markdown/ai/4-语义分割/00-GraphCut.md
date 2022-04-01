@@ -1,6 +1,6 @@
 # GraphCut
 
-## 信息
+## 基础信息
 
 文章标题：Interactive Graph Cuts for Optimal Boundary & Region Segmentation of Objects in N-D Images
 

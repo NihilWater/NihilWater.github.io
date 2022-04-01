@@ -1,6 +1,6 @@
 # Associative Embedding
 
-## 信息
+## 基础信息
 
 文章标题：Associative Embedding: End-to-End Learning for Joint Detection and Grouping
 

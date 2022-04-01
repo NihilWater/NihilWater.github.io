@@ -1,6 +1,6 @@
 # BlendMask
 
-## 信息
+## 基础信息
 
 文章标题：BlendMask: Top-Down Meets Bottom-Up for Instance Segmentation
 

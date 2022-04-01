@@ -6,7 +6,7 @@ Simple Does It 使用了Bounding Box 作为弱监督分割的标签，论文认�
 
 <hr style=" border:solid; width:100px; height:1px;" color=#eee size=1">
 
-## 信息
+## 基础信息
 论文题目：Simple Does It: Weakly Supervised Instance and Semantic Segmentation
 论文链接： [https://openaccess.thecvf.com/content_cvpr_2017/html/Khoreva_Simple_Does_It_CVPR_2017_paper.html](https://openaccess.thecvf.com/content_cvpr_2017/html/Khoreva_Simple_Does_It_CVPR_2017_paper.html)
 
