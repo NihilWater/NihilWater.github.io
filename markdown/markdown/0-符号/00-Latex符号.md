@@ -150,6 +150,7 @@ $\Omega$   : \Omega
 
 ⨆：\bigsqcup
 
+\\: \backslash
 
 
 ## 对数运算符

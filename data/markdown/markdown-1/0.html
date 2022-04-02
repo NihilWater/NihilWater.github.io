@@ -1,0 +1,105 @@
+<h1>VScode优雅开发markdown</h1>
+<p>  Markdown 是一种简单的标记语义，可以方便富文本的编辑。Markdown可以方便的被解析为HTML，在页面上展示，支持多种插件的嵌入，如使用<code>Katex</code>可以让markdown支持数学公式，也可以插入html代码，丰富markdown 的表达。</p>
+<p>  本文将介绍vscode种常用的 <font color='red'>Markdown插件</font> ，及其配置。并介绍如何使用 <font color='red'>用户自定义代码片段（<code>snippets</code>）</font> 来快捷的添加常用表达。</p>
+<h2>插件</h2>
+<p>对于编辑markdown来说，以下两个插件就绰绰有余了。第一个是<code>Markdown All in One</code>,其集成了一款优秀的Markdown编辑器的很多功能，比如方便的快捷键，自动生成目录，格式化表格等。第二个是<code>Paste Image</code> 这是一个复制粘贴图片到markdown的工具。</p>
+<p><img src="../../../img/article/2022-04-02-11-41-34.png" alt=""></p>
+<p><img src="../../../img/article/2022-04-02-11-41-59.png" alt=""></p>
+<h3>Markdown All in One</h3>
+<ol>
+<li>
+<p>功能：</p>
+<p>常用操作的快捷键</p>
+<p>支持目录</p>
+<p>支持同步预览(ctrl+shift+v)</p>
+<p>轻松转换html和pdf文件</p>
+<p>可格式化table(alt+shift+f)和task list(alt+c)</p>
+<p>支持特殊数学符号渲染</p>
+</li>
+<li>
+<p>常用快捷键</p>
+<p>粗体 ctrl+b</p>
+<p>斜体 ctrl+i</p>
+<p>删除线 alt+s</p>
+<p>切换数学环境 ctrl+m</p>
+<p>同步预览 ctrl+shift+v</p>
+<p>检查任务列表项 alt+c</p>
+<p>格式化表格 alt+shift+f</p>
+<p>格式化任务列表 alt+c</p>
+</li>
+<li>
+<p>常用命令</p>
+<blockquote>
+<p>先按F1进入VSCode命令面板</p>
+</blockquote>
+<p>自动创建目录 Create Table of Contents</p>
+<p>更新目录 Update Table of Contents</p>
+<p>添加/更新标题编号 Add/Update Section numbers</p>
+</li>
+</ol>
+<h3>Paste Image</h3>
+<p>在编写md需要插入图片，按下快捷键<code>ctrl + alt + v</code>，这个插件就可以将粘贴板的图片保存到磁盘，并生成图片链接。插件的使用需要在setting.json里配置图片存储的位置。</p>
+<pre class="hljs"><code><span class="hljs-string">&quot;pasteImage.path&quot;</span>: <span class="hljs-string">&quot;${projectRoot}/img&quot;</span> <span class="hljs-comment">// img是存放图片的文件夹，${projectRoot}表示项目的根路径</span>
+</code></pre>
+<p>也可以在工作区配置文件（<code>.code-workspace</code>）中加入这条配置,例如</p>
+<pre class="hljs"><code><span class="hljs-comment">// my-project.code-workspace</span>
+{
+	<span class="hljs-string">&quot;folders&quot;</span>: [{<span class="hljs-string">&quot;path&quot;</span>: <span class="hljs-string">&quot;..&quot;</span>}],
+	<span class="hljs-string">&quot;settings&quot;</span>: {
+		<span class="hljs-string">&quot;pasteImage.path&quot;</span>: <span class="hljs-string">&quot;${projectRoot}/image&quot;</span>
+	}
+}
+</code></pre>
+<h2>用户自定义代码片段</h2>
+<p>在markdown 的编写中，往往需要有一些常用的操作，但是在markdown中需要复杂的代码，比如给文字 <font color='red'>上色</font>，添加表格等，这时我们可以使用自定义代码段的方式来创建模板快速的完成长窜代码的编写。</p>
+<ol>
+<li>
+<p>找到vscode 文件 -&gt; 首选项 -&gt; 用户片段 ， 如下图所示</p>
+<p><img src="../../../img/article/2022-04-02-13-08-23.png" alt=""></p>
+</li>
+<li>
+<p>选择新建全局代码片段，或者新建“xxxx”文件夹的代码片段</p>
+<p><img src="../../../img/article/2022-04-02-13-10-03.png" alt=""></p>
+</li>
+<li>
+<p>编写用户自定义代码，例如</p>
+<blockquote>
+<p>这段代码添加了两个子定义代码，一个是输入<code>red</code> 解析为<code>&lt;font color='red'&gt;&lt;/font&gt;</code>, 一个是输入<code>space</code> 解析为 <code>&amp;emsp;&amp;emsp;(表示两个空格)</code>，</p>
+</blockquote>
+<pre class="hljs"><code>{
+    <span class="hljs-string">&quot;Red&quot;</span>: {
+        <span class="hljs-string">&quot;prefix&quot;</span>: <span class="hljs-string">&quot;red&quot;</span>,     <span class="hljs-comment">// 快捷键 </span>
+        <span class="hljs-string">&quot;scope&quot;</span>: <span class="hljs-string">&quot;markdown&quot;</span>, <span class="hljs-comment">// 设置只在markdown文件中提示，如果需要在多种文件中提示，可以使用, 隔开</span>
+        <span class="hljs-string">&quot;body&quot;</span>: [
+            <span class="hljs-string">&quot;&lt;font color=&#x27;red&#x27;&gt;$1&lt;/font&gt;&quot;</span> <span class="hljs-comment">// 解析结果，$1,表示光标位置，还有$2,$3 ...</span>
+        ],
+        <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;快速生成红色字体&quot;</span>  <span class="hljs-comment">// 描述</span>
+    },
+    <span class="hljs-string">&quot;Space&quot;</span>: {
+        <span class="hljs-string">&quot;prefix&quot;</span>: <span class="hljs-string">&quot;space&quot;</span>,
+        <span class="hljs-string">&quot;scope&quot;</span>: <span class="hljs-string">&quot;markdown&quot;</span>,
+        <span class="hljs-string">&quot;body&quot;</span>: [
+            <span class="hljs-string">&quot;&amp;emsp;&amp;emsp;&quot;</span>
+        ],
+        <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;段首缩进&quot;</span>
+    }
+}
+</code></pre>
+<p>效果如下，点击<code>red</code>以后就会变成<code>&lt;font color='red'&gt;|&lt;/font&gt;</code>，
+<img src="../../../img/article/2022-04-02-13-21-51.png" alt=""></p>
+<p>如果没有产生上面的效果，需要在设置里，加上markdown的智能提示。</p>
+<pre class="hljs"><code><span class="hljs-string">&quot;[markdown]&quot;</span>: {<span class="hljs-string">&quot;editor.quickSuggestions&quot;</span>: <span class="hljs-literal">true</span>}
+</code></pre>
+<p>或者在工作区配置文件（<code>.code-workspace</code>）中加入这条配置,例如</p>
+<pre class="hljs"><code>{
+    <span class="hljs-string">&quot;folders&quot;</span>: [{<span class="hljs-string">&quot;path&quot;</span>: <span class="hljs-string">&quot;..&quot;</span>}],
+    <span class="hljs-string">&quot;settings&quot;</span>: {
+        <span class="hljs-string">&quot;pasteImage.path&quot;</span>: <span class="hljs-string">&quot;${projectRoot}/image&quot;</span>,
+        <span class="hljs-string">&quot;[markdown]&quot;</span>: {<span class="hljs-string">&quot;editor.quickSuggestions&quot;</span>: <span class="hljs-literal">true</span>}
+    }
+}
+</code></pre>
+</li>
+</ol>
+<h2>参考</h2>
+<p>https://www.cnblogs.com/liangdiaonumberone/p/14191994.html</p>
