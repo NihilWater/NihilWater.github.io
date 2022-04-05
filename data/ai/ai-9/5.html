@@ -1,7 +1,19 @@
-<h1>ISTR</h1>
+<h1>BoxInst 变量</h1>
+<p>本文简单介绍BoxInst 模型中所使用到的关键变量</p>
 <h2>基础信息</h2>
-<p>文章链接：<a href="https://arxiv.org/abs/2105.00637">https://arxiv.org/abs/2105.00637</a></p>
-<p>发表时间：2021-05</p>
-<p><img src="../../../img/article/2022-02-26-14-06-17.png" alt=""></p>
-<h2>创新点简介</h2>
-<p>本文设计了一款TransFormer结构，类比了Spacer RCNN的思想，使用固定数目的RoI对目标进行界框检测和实例分割。</p>
+<p>论文标题: BoxInst: High-Performance Instance Segmentation with Box Annotations</p>
+<p>论文链接：<a href="https://openaccess.thecvf.com/content/CVPR2021/html/Tian_BoxInst_High-Performance_Instance_Segmentation_With_Box_Annotations_CVPR_2021_paper.html">https://openaccess.thecvf.com/content/CVPR2021/html/Tian_BoxInst_High-Performance_Instance_Segmentation_With_Box_Annotations_CVPR_2021_paper.html</a></p>
+<p>发布时间: 2020-12 (CVPR 2021)</p>
+<h2>创新点总结</h2>
+<p>提出了一种高性能、仅使用边界框注释进行训练的任务级实例分割。（例如，在COCO数据集上，大幅提高了先前最佳报告的掩码AP 21.1%[12]至31.6%）。核心思想是重新设计实例分割中的学习掩码损失，而不修改分割网络本身。新的lossFunction可以在不依赖掩码注释的情况下监督掩码训练。这可以通过两个损失实现，即：1）一个替代项，该替代项最小化地面真值盒的投影和预测掩模之间的差异；2） 一种成对丢失，它利用了一种先验知识，即具有相似颜色的近端像素很可能具有相同的类别标签。</p>
+<p><img src="../../../img/article/2021-11-01-10-35-26.png" alt="损失计算过程"></p>
+<h3>创新点</h3>
+<p>设计了一个更加有效的损失函数，损失函数包含两个部分。</p>
+<blockquote>
+<p>① 对预测的掩膜在宽高上的投影与Gound Truth在宽高上的投影进行比较</p>
+<p>② 将颜色相似的像素归为同一个类，形成mask，让后就可以用来训练了</p>
+</blockquote>
+<h3>结果</h3>
+<p>通过一个ResNet-101主干网，我们在COCO测试开发拆分中实现了33.2%的掩码AP（与完全监督对应的39.1%相比）。</p>
+<h3>流程图</h3>
+<pre><embed type="image/svg+xml" src="../../../img/article/boxinst_vars.svg" /></pre>

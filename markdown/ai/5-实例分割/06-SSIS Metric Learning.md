@@ -5,7 +5,7 @@
 
 文章链接：[https://arxiv.org/abs/1703.10277](https://arxiv.org/abs/1703.10277)
 
-发表时间：2017-10
+发表时间：2017-03-30
 
 ## 创新点简介
 本文使用先计算出两个像素属于同一个目标的可能性后再聚类的方式，完成实例分割任务。`【论文原句】first computing how likely two pixels are to belong to the same object, and then by grouping similar pixels together`。具体来说论文使用全卷积的模型计算出相似度矩阵，然后通过“种子点”聚类相似像素。这些 “种子点” 是由一个全卷积网络训练出来的。

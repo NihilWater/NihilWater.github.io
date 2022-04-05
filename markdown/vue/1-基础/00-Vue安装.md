@@ -1,10 +1,13 @@
 # Vue 环境配置 
 
 
-## 使用 nvm 创建合适的npm
+## 使用 nvm 创建合适的node
 ```shell
 nvm install <version>
 ```
+
+<font color='red'>出现没有npm的情况可以去下面的链接中下载</font>
+> https://github.com/npm/cli/archive
 
 ## 安装cnpm
 ```shell
