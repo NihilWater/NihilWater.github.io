@@ -20,3 +20,9 @@ nvm alias default [node版本号] ##设置默认版本
 ```shell
 cnpm list -g --depth 0
 ```
+
+### react 修改打包路径
+```js
+// 在package.json中
+  "homepage": ".",
+```
