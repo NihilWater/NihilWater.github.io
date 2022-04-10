@@ -1,0 +1,4 @@
+# WinSCP
+
+WinSCP是一个Windows环境下使用SSH的开源图形化SFTP客户端。同时支持SCP协议。它的主要功能就是在本地与远程计算机间安全的复制文件。.winscp也可以链接其他系统,比如linux系统。
+
