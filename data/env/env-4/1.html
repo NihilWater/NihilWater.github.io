@@ -1,0 +1,34 @@
+<h1>Windows Tomcat 安装</h1>
+<h2>安装 java</h2>
+<p>由于<code>Tomcat</code>是基于<code>java</code>的，所以安装<code>jdk</code>是安装<code>Tomcat</code>的第一步。对于国内环境来说，<code>java8</code>仍然是最常用的，所以连选择环境的考虑都不用考虑了。作者使用的<code>java8</code>是免安装的。解压后仍然需要配置环境。以便从中学习配置的细节。</p>
+<ol>
+<li>
+<p>解压下载的压缩包</p>
+</li>
+<li>
+<p>配置环境变量</p>
+<blockquote>
+<p>JAVA_HOME</p>
+</blockquote>
+<p><img src="../../../img/article/2022-04-10-16-21-29.png" alt=""></p>
+<blockquote>
+<p>PATH</p>
+</blockquote>
+<pre class="hljs"><code>%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin;
+</code></pre>
+<p><img src="../../../img/article/2022-04-10-16-25-25.png" alt=""></p>
+</li>
+<li>
+<p>检测java环境是否正确</p>
+<p>使用 <code>java -version</code> 来进行判断，如果显示出了结果，则成功了。</p>
+<p><img src="../../../img/article/2022-04-10-16-29-50.png" alt=""></p>
+</li>
+</ol>
+<h2>安装 Tomcat</h2>
+<p>下载连接： <a href="https://tomcat.apache.org/">https://tomcat.apache.org/</a></p>
+<p><img src="../../../img/article/2022-04-10-16-35-51.png" alt=""></p>
+<p><img src="../../../img/article/2022-04-10-16-36-42.png" alt=""></p>
+<p>下载zip之后，找到文件夹里的<code>bin\startup.bat</code>双击运行。</p>
+<p><img src="../../../img/article/2022-04-10-16-43-36.png" alt=""></p>
+<p>如果一切正常时，结果会产生一个小黑窗，在倒数第二行的最后，可以看到端口号为<code>8080</code>。接着使用浏览器，输入<code>localhost:8080</code>就可以进行访问了，至此<code>Tomcat</code>的安装就完成了。</p>
+<p><img src="../../../img/article/2022-04-10-16-47-19.png" alt=""></p>
