@@ -1,0 +1,17 @@
+<h1>Ubuntu 开启 SSH 服务</h1>
+<h2>1. 安装 openssh-server</h2>
+<pre class="hljs"><code>sudo apt-get install openssh-server
+</code></pre>
+<h2>2. 查看是否开启了ssh</h2>
+<pre class="hljs"><code>ps -e |grep ssh
+</code></pre>
+<h2>3. 开启SSH</h2>
+<p>如果服务没有开器可以使用以下的命令来进行开启</p>
+<pre class="hljs"><code>sudo /etc/init.d/ssh start
+</code></pre>
+<h2>4. 连接部分</h2>
+<p>在Ubuntu 命令行使用<code>ifconfig</code> 命令查看网络地址ip地址</p>
+<p><img src="../../../img/article/2022-04-11-14-45-30.png" alt=""></p>
+<p>之后在xshell 中填写ip，端口号，用户名和密码就可以对虚拟机进行连接了。</p>
+<p><img src="../../../img/article/2022-04-11-14-48-33.png" alt=""></p>
+<p><img src="../../../img/article/2022-04-11-14-47-36.png" alt=""></p>
