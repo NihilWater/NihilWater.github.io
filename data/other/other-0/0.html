@@ -1,0 +1,66 @@
+<h1>python 爬取一个网页下所有图片</h1>
+<pre class="hljs"><code><span class="hljs-keyword">import</span> requests
+<span class="hljs-keyword">import</span> re
+<span class="hljs-keyword">import</span> time
+
+<span class="hljs-keyword">from</span> urllib.parse <span class="hljs-keyword">import</span> urlparse, parse_qs, parse_qsl
+
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">get_html</span>(<span class="hljs-params">url</span>):
+    <span class="hljs-string">&#x27;&#x27;&#x27;
+    两个参数
+    :param url:统一资源定位符,请求网址
+    :param headers:请求头
+    :return:html
+    &#x27;&#x27;&#x27;</span>
+
+    response = requests.get(url)
+    <span class="hljs-comment"># 获取网页信息文本</span>
+    html = response.text
+    <span class="hljs-comment"># ***************** End ******************** #</span>
+    <span class="hljs-keyword">return</span> html
+
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">findImageUrl</span>(<span class="hljs-params">html</span>):
+    <span class="hljs-string">&#x27;&#x27;&#x27;
+    通过正则表达式匹配html 文本里的所有图片
+    :param html:
+    :return:
+    &#x27;&#x27;&#x27;</span>
+    pattern = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&#x27;&lt;img .*?src=&quot;(.*?)&quot;&#x27;</span>)
+    <span class="hljs-keyword">return</span> pattern.findall(html)
+
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">getImageByLink</span>(<span class="hljs-params">url</span>):
+    resp = requests.get(url)  <span class="hljs-comment"># 获取网页信息</span>
+    byte = resp.content  <span class="hljs-comment"># 转化为content二进制</span>
+    <span class="hljs-keyword">return</span> byte
+
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
+    base_url = <span class="hljs-string">&quot;http://*****&quot;</span>
+    out_path = <span class="hljs-string">&quot;imgs/&quot;</span>
+
+    scheme = urlparse(base_url).scheme
+    hostname = urlparse(base_url).hostname
+
+    <span class="hljs-comment"># 1. 获取指定url 下的所有图片</span>
+    html = get_html(base_url)
+    <span class="hljs-built_in">print</span>(html)
+
+    <span class="hljs-comment"># 2. 使用正则表达式获取所有的图片链接</span>
+    imgurls = findImageUrl(html)
+    <span class="hljs-built_in">print</span>(imgurls)
+
+    <span class="hljs-comment"># 3. 通过图片连接下载</span>
+    i = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">for</span> img_url <span class="hljs-keyword">in</span> imgurls:
+        img_url = scheme + <span class="hljs-string">&quot;://&quot;</span> + hostname + img_url <span class="hljs-keyword">if</span> img_url[<span class="hljs-number">0</span>] == <span class="hljs-string">&#x27;/&#x27;</span> <span class="hljs-keyword">else</span> base_url + <span class="hljs-string">&#x27;/&#x27;</span> + img_url
+        <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;imgs/{}.jpg&quot;</span>.<span class="hljs-built_in">format</span>(i), <span class="hljs-string">&quot;wb&quot;</span>) <span class="hljs-keyword">as</span> f:  <span class="hljs-comment"># 文件写入</span>
+            byte = getImageByLink(img_url)
+            f.write(byte)
+            time.sleep(<span class="hljs-number">0.1</span>)
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;第{}张图片爬取成功!&quot;</span>.<span class="hljs-built_in">format</span>(i))
+        i = i + <span class="hljs-number">1</span>
+
+</code></pre>
