@@ -250,3 +250,7 @@ y˘：\breve{y}
 ⟹：\Longrightarrow 
 
 ⟸ ：\Longleftarrow
+
+
+其他：
+~: \sim 或者 \textasciitilde
