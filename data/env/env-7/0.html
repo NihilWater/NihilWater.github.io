@@ -1,0 +1,47 @@
+<h1>JBoss 的安装和系统部署</h1>
+<h2>1、下载JDK6！！</h2>
+<p>JBoss 已经不在维护，并且更名为WildFly。如果您执意要使用JBoss部署，请务必下载比较旧的JDK，这种上古的项目就需要我们拿着上世纪的火铳...</p>
+<p>否则将会出现一些列的问题，小编解决了一个，又来一个...</p>
+<p>下载地址如下，这里选择华为云的jdk镜像，如果之前已经安装过Java 8，记得将环境变量中的JAVA_HOME 替换为1.6的。、</p>
+<blockquote>
+<p>https://repo.huaweicloud.com/java/jdk/6u45-b06/</p>
+</blockquote>
+<br/>
+<h2>2、下载JBoss 解压包</h2>
+<p>下载链接如下</p>
+<blockquote>
+<p>https://jbossas.jboss.org/downloads</p>
+</blockquote>
+<p>对于windows用户使用zip压缩包就可以，如果是linux 则使用Gz 压缩包。本文以windows 为例子</p>
+<p><img src="../../../img/article/2022-04-16-19-07-27.png" alt=""></p>
+<br/>
+<h2>3、配置环境变量</h2>
+<p><img src="../../../img/article/2022-04-16-19-16-01.png" alt=""></p>
+<br/>
+<h2>4、启动方法</h2>
+<p>找到bin目录下的standalone.bat，双击启动即可。</p>
+<p><img src="../../../img/article/2022-04-16-19-55-01.png" alt=""></p>
+<p><img src="../../../img/article/2022-04-16-19-58-20.png" alt=""></p>
+<h2>5、解决报错</h2>
+<p>这只是使用JAVA 8 是JVM的一个小错误，后继包的错误，小编无力再调整了...先记录一下，以给上古的先人们一个修改JVM参数的方法。</p>
+<blockquote>
+<p>报错如下
+<img src="../../../img/article/2022-04-16-19-23-20.png" alt=""></p>
+</blockquote>
+<p>修改同目录下的以下两个位置，这两个位置的环境变量会在程序启动时被使用。
+<img src="../../../img/article/2022-04-16-19-24-13.png" alt=""></p>
+<p><img src="../../../img/article/2022-04-16-19-27-03.png" alt=""></p>
+<h2>6、部署应用</h2>
+<p>首先将文件打包成war包，将War包放在jbossas 的 <code>standalone\deployments</code>文件夹下，最后再次找到bin目录下的standalone.bat，双击启动即可。</p>
+<p>建议开发过程就打包，如果拿到手的是没有打包的可以执行以下命令进行打包。</p>
+<pre class="hljs"><code>jar -cvf WebReport.war .
+</code></pre>
+<p>以帆软为例，我们找到它的服务端程序。一个明显的特征就是其中有一个叫做<code>WEB-INF</code>的文件夹。</p>
+<p><img src="../../../img/article/2022-04-16-21-11-55.png" alt=""></p>
+<p>在当前目录下执行<code>jar -cvf WebReport.war .</code>就可以获取一个名为<code>WebReport.war</code>的war包。</p>
+<p>接下来将War包放在jbossas 的 <code>standalone\deployments</code>文件夹下。</p>
+<p><img src="../../../img/article/2022-04-16-21-14-49.png" alt=""></p>
+<p>最后再次找到bin目录下的standalone.bat，双击启动即可。</p>
+<p><img src="../../../img/article/2022-04-16-21-16-28.png" alt=""></p>
+<p>当看到以上内容就说明部署完成了。访问浏览器8080端口得到如下内容。</p>
+<p><img src="../../../img/article/2022-04-16-21-18-13.png" alt=""></p>
