@@ -1,0 +1,77 @@
+<h1>微信小程序用户登录一般流程</h1>
+<h2>流程图</h2>
+<p><img src="../../../img/article/2022-04-17-12-55-20.png" alt=""></p>
+<h2>获取用户OpenId</h2>
+<p>上文中说过OpenId是微信用户在小程序里的唯一识别码，获取了它，就等于有了用户Id，以方便之后用户敏感的所有操作。那么如何去获取它呢？</p>
+<p>微信提供<code>wx.login</code>方法来获取一个叫做<code>code</code>的东西，通过<code>code</code> + <code>微信小程序密钥</code>，来对<code>https://api.weixin.qq.com/sns/jscode2session</code> 发起请求，就可以获取用户的<code>openId</code>了。</p>
+<pre class="hljs"><code><span class="hljs-comment">// 调用 wx.login 获取用户 code</span>
+wx.<span class="hljs-title function_">login</span>({
+  <span class="hljs-attr">success</span>: <span class="hljs-keyword">function</span> (<span class="hljs-params">res</span>) {
+     <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">code</span>)
+  }
+})
+</code></pre>
+<p>通过以上代码可以放到app的onload方法中，打开小程序就取得用户的code，下一步就需要将code发送给后端服务程序。获取用户的OpenId了。
+【前端代码】</p>
+<pre class="hljs"><code><span class="hljs-comment">// 获取用户openid</span>
+<span class="hljs-attr">getOpenid</span>: <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">let</span> that = <span class="hljs-variable language_">this</span>
+  wx.<span class="hljs-title function_">login</span>({
+    <span class="hljs-attr">success</span>: <span class="hljs-keyword">function</span> (<span class="hljs-params">res</span>) {
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">code</span>)
+      wx.<span class="hljs-title function_">request</span>({
+        <span class="hljs-attr">method</span>:<span class="hljs-string">&quot;POST&quot;</span>,
+        <span class="hljs-comment">// 这里填写用于自己后台用户登录的地址</span>
+        <span class="hljs-attr">url</span>: that.<span class="hljs-property">globalData</span>.<span class="hljs-property">baseURL</span> + <span class="hljs-string">&quot;/auth/login&quot;</span>,
+        <span class="hljs-attr">data</span>: res.<span class="hljs-property">code</span>,
+        <span class="hljs-attr">success</span>: <span class="hljs-keyword">function</span> (<span class="hljs-params">res</span>) {
+          <span class="hljs-keyword">if</span> (res.<span class="hljs-property">data</span>.<span class="hljs-property">code</span> === <span class="hljs-string">&quot;200&quot;</span>){
+            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">data</span>.<span class="hljs-property">data</span>)
+          }
+        },
+        <span class="hljs-attr">fail</span>: <span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) {
+          <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(err)
+        }
+      })
+    }
+  })
+},
+</code></pre>
+<p>【后端代码java为例，service层】</p>
+<pre class="hljs"><code><span class="hljs-comment">// 输入为前端所传来的用户code</span>
+<span class="hljs-keyword">public</span> Map&lt;String, Object&gt; <span class="hljs-title function_">login</span><span class="hljs-params">(String code)</span> {
+    <span class="hljs-comment">// **1**.向微信服务器发起请求，获取用户信息</span>
+    <span class="hljs-comment">// ConstantConfig.getSessionKeyUrl = &quot;https://api.weixin.qq.com/sns/jscode2session&quot; </span>
+    <span class="hljs-comment">// ConstantConfig.appId 小程序appId  ：</span>
+    <span class="hljs-comment">//    公众平台设置 -&gt; 开发管理 -&gt; 开发设置 -&gt; appId</span>
+    <span class="hljs-comment">// ConstantConfig.appId 小程序secret ：</span>
+    <span class="hljs-comment">//    公众平台设置 -&gt; 开发管理 -&gt; 开发设置 -&gt; 生成AppSecret</span>
+    <span class="hljs-comment">// ConstantConfig.grantType = &quot;JSAPI&quot; 小程序为JSAPI</span>
+    <span class="hljs-type">String</span> <span class="hljs-variable">url</span> <span class="hljs-operator">=</span> ConstantConfig.getSessionKeyUrl
+                + <span class="hljs-string">&quot;?appid=&quot;</span> + ConstantConfig.appId 
+                + <span class="hljs-string">&quot;&amp;secret=&quot;</span> + ConstantConfig.secret 
+                + <span class="hljs-string">&quot;&amp;js_code=&quot;</span> + code 
+                + <span class="hljs-string">&quot;&amp;grant_type=&quot;</span> + ConstantConfig.grantType;
+    <span class="hljs-type">JSONObject</span> <span class="hljs-variable">httpResult</span> <span class="hljs-operator">=</span> HttpUtils.httpGet(url);
+
+    <span class="hljs-comment">// **2**.收到数据，判断是否有错</span>
+    Map&lt;String, Object&gt; result = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+    <span class="hljs-type">String</span> <span class="hljs-variable">openid</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&quot;</span>;
+    String skey;
+    <span class="hljs-keyword">if</span> (httpResult.get(<span class="hljs-string">&quot;errcode&quot;</span>) != <span class="hljs-literal">null</span>) {
+        result.put(<span class="hljs-string">&quot;errcode&quot;</span>, httpResult.get(<span class="hljs-string">&quot;expires_in&quot;</span>));
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-comment">// **3**.微信服务器传回有效数据，判断用户登录状态是否过期，没有就刷新一下状态</span>
+        openid = httpResult.get(<span class="hljs-string">&quot;openid&quot;</span>).toString();
+        skey = httpResult.get(<span class="hljs-string">&quot;session_key&quot;</span>).toString();
+        <span class="hljs-keyword">if</span> (openid == <span class="hljs-literal">null</span>) {
+            result.put(<span class="hljs-string">&quot;code&quot;</span>, <span class="hljs-string">&quot;400&quot;</span>);
+            <span class="hljs-keyword">return</span> result;
+        }
+    }
+    <span class="hljs-comment">// **4**. 返回用户 openid</span>
+    result.put(<span class="hljs-string">&quot;code&quot;</span>, <span class="hljs-string">&quot;200&quot;</span>);
+    result.put(<span class="hljs-string">&quot;openid&quot;</span>, openid);
+    <span class="hljs-keyword">return</span> result;
+}
+</code></pre>

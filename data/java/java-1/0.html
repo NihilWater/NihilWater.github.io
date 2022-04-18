@@ -1,0 +1,28 @@
+<h1>java 未编组错误</h1>
+<h2>documentationPluginsBootstrapper</h2>
+<blockquote>
+<p>org.springframework.context.ApplicationContextException: Failed to start bean 'documentationPluginsBootstrapper'; nested exception is java.lang.NullPointerException</p>
+</blockquote>
+<p>【产生原因】：使用swagger 和 springboot 版本不匹配。</p>
+<p>【解决方法】：下面给出几组常用的swagger 与springboot 的搭配版本，以供选择。</p>
+<table>
+<thead>
+<tr>
+<th>springboot</th>
+<th>swagger</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2.5.6</td>
+<td>2.9.2-</td>
+</tr>
+<tr>
+<td>2.5.6</td>
+<td>2.10.0+</td>
+</tr>
+</tbody>
+</table>
+<p>【其他提示】：需要说明一下，swagger2.9 以前的注解<code>@EnableSwaggerM2</code> 会在2.10中变为<code>@EnableSwagger2WebMvc</code>,具体maven坐标如下。</p>
+<pre class="hljs"><code>
+</code></pre>

@@ -48,5 +48,20 @@
 <td>tensor.flatten(dim1, dim2)</td>
 <td>可以将维度进行结合</td>
 </tr>
+<tr>
+<td>增加维度</td>
+<td>tensor.unsqueeze(dim)</td>
+<td>增加一个维度，周长为1</td>
+</tr>
+<tr>
+<td>矩阵拼接</td>
+<td>torch.cat((a,b),dim=)</td>
+<td>矩阵拼接， 在第n个维度上进行拼接</td>
+</tr>
+<tr>
+<td>矩阵堆叠</td>
+<td>torch.stack([a,b],dim=)</td>
+<td>堆叠矩阵，不同于cat，他会创建一个新的维度</td>
+</tr>
 </tbody>
 </table>
