@@ -1,31 +1,15 @@
-<h1>CommunityLearning</h1>
+<h1>IRNet</h1>
 <h2>基础信息</h2>
-<p>文章标题：Weakly Supervised Instance Segmentation by Deep Community Learning</p>
-<p>文章链接：<a href="https://arxiv.org/pdf/2001.11207.pdf">https://arxiv.org/pdf/2001.11207.pdf</a></p>
-<p>发表时间：2020-01</p>
+<p>文章标题：Weakly Supervised Learning of Instance Segmentation with Inter-pixel Relations</p>
+<p>文章链接：<a href="http://arxiv.org/pdf/1904.05044">http://arxiv.org/pdf/1904.05044</a></p>
+<p>发表时间：2019-04 (CPVR 2019)</p>
 <h2>背景</h2>
-<p>对于弱监督的实例分割，简单的结合检测和分割网络的一个最关键的限制是，学习到的模型往往关注对象的小区域，无法恢复目标对象的缺失部分。这在一定程度上是因为<strong>分割网络依赖于噪声检测结果，而没有适当的交互作用</strong>，迭代标签细化过程的好处往往在早期阶段就饱和了。而两个模块输出之间的强相关性。</p>
 <h2>创新点简介</h2>
-<p>作者提出将目标检测，伪标签生成，实例分割等组件构造成一个循环链。该链有助于各个模块之间的交互，从而提取有用的信息。
-(社区学习， community learning)这篇文章通过训练多个子模型用于多个子任务，end-to-end trainable deep neural network with active interactions between multiple tasks。</p>
-<p>社区学习与多任务学习不同，后者试图在没有参与模块之间紧密互动的情况下平行实现多个目标。
-The community learning is different from multi-task learning that attempts to achieve multiple objectives in parallel without tight interaction between participating modules.</p>
-<h2>详情</h2>
-<p><img src="../../../img/article/2022-04-04-15-34-56.png" alt=""></p>
-<p>模型一共分为4个部分，特诊提取网络，目标检测网络，伪标签生成模块和实例分割网络，模型首先从检测模块中识别出积极的检测包围框，并使用类激活映射生成实例分割的伪标签。该模型使用伪标签对三个成分进行多任务缺失训练。通过实例掩码生成模块和分割模块输出的集合，得到最终的分割掩码。</p>
-<p><img src="../../../img/article/2021-12-10-14-59-50.png" alt=""></p>
-<p>【Object Detection Module】</p>
-<p>作者参考OICR，提出了一种基于 <font color='red'>伪标签</font> 的类不可知边界盒回归器，以避免过度区分的表示学习，并提供更好的正则化效果。</p>
-<p>【Instance Mask Generation (IMG) Module】</p>
-<p>这个模块使用目标检测的给出的提议框为实例分割构造伪地面真相掩码。它从附加到多个卷积层的SPP层中提取每个提案的特征。由于IMG模块利用骨干网中不同层次的层次表示，它可以有效地处理多尺度对象。模块的输出是三个CAM的平均值，输出<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>M</mi><mo stretchy="true">~</mo></mover></mrow><annotation encoding="application/x-tex">\widetilde{M}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.94333em;vertical-align:0em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.94333em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">M</span></span></span><span class="svg-align" style="width:calc(100% - 0.16668em);margin-left:0.16668em;top:-3.6833299999999998em;"><span class="pstrut" style="height:3em;"></span><span style="height:0.26em;"><svg width='100%' height='0.26em' viewBox='0 0 600 260' preserveAspectRatio='none'><path d='M200 55.538c-77 0-168 73.953-177 73.953-3 0-7
--2.175-9-5.437L2 97c-1-2-2-4-2-6 0-4 2-7 5-9l20-12C116 12 171 0 207 0c86 0
- 114 68 191 68 78 0 168-68 177-68 4 0 7 2 9 5l12 19c1 2.175 2 4.35 2 6.525 0
- 4.35-2 7.613-5 9.788l-19 13.05c-92 63.077-116.937 75.308-183 76.128
--68.267.847-113-73.952-191-73.952z'/></svg></span></span></span></span></span></span></span></span></span>的维度是<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi mathvariant="double-struck">R</mi><mrow><mi>C</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>×</mo><msup><mi>T</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\mathbb{R}^{C+1}\times T^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.924661em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord"><span class="mord mathbb">R</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>。上图中的T选择<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>28</mn><mo>×</mo><mn>28</mn></mrow><annotation encoding="application/x-tex">28 \times 28</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord">8</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">8</span></span></span></span></p>
-<p>【Instance Mask Generation (IMG) Module】</p>
-<p>从低层的Res5 上采样到<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo>×</mo><mi>T</mi></mrow><annotation encoding="application/x-tex">T \times T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span></span></span></span>, 经过4层卷积，进行激活，和伪标签生成模块IMG的输出做损失。</p>
-<h2>trick</h2>
-<ul>
-<li>在使用有实例框的标注中，可以不使用全局平均池化，而是适当的提高中间的权重。</li>
-<li>使用<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mi>o</mi><mi>g</mi><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><mi>f</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">log(1+f)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mclose">)</span></span></span></span>作为CAM的输入，这样可以抑制峰值, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span></span></span></span>表示特征的输出。</li>
-</ul>
+<p><img src="../../../img/article/2022-03-24-11-04-21.png" alt=""></p>
+<p>本文使用全集标记，类激活图完成了实例分割任务。为解决类激活图无法区分实例，使用了pairwise semantic affinitie（成对语义相似关系）和lass-agnostic instance map (无类别实例映射)。(类不可知实例映射是一个粗糙的实例分割掩码，没有类标签，也没有精确的边界。另一方面，一对像素之间的语义亲和力是它们之间的类等价性的置信度。)</p>
+<h2>详细内容</h2>
+<h3>模型结构</h3>
+<h3>pairwise semantic affinitie（成对语义相似关系）</h3>
+<p>通过成对语义关系可以对个体的边缘进行判断。也即从图像中任意选取两个像素，当这两个像素属于不同的类别时，就认为他们之间存在一条边界</p>
+<h3>lass-agnostic instance map (无类别实例映射)</h3>
+<p>预测每一个实例的重心（相对位置，且是个是矢量），表示该像素到预测重心的偏移。</p>

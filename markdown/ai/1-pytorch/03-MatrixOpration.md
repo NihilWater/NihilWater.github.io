@@ -12,3 +12,5 @@
 | 增加维度 | tensor.unsqueeze(dim) | 增加一个维度，周长为1 |
 | 矩阵拼接 | torch.cat((a,b),dim=)  | 矩阵拼接， 在第n个维度上进行拼接|
 | 矩阵堆叠 | torch.stack(\[a,b\],dim=) | 堆叠矩阵，不同于cat，他会创建一个新的维度|
+| 重复函数 | tensor.repeat(dim1, dim2) | 矩阵重复|
+| 线性递增 | torch.arange(start, end, step) | 生成从start（包含）到end(不包含) 步长为step的线性tensor |

@@ -19,6 +19,11 @@ conda create -n environment_name python=3.6
 conda create --prefix=D:/environment/Python python=3.8
 ```
 
+克隆一个虚拟环境
+```
+conda create -n env2 --clone env1 
+```
+
 
 
 

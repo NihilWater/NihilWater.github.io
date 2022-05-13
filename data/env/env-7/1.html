@@ -1,0 +1,28 @@
+<h1>Gin 框架快速上手</h1>
+<h2>Gin的安装</h2>
+<p>【设置代理】</p>
+<pre class="hljs"><code><span class="hljs-meta prompt_"># </span><span class="language-bash">取消校验，为了保证安全，Go官方设定的module校验数据库，服务器地址为：sum.golang.org，如果不关闭还是无法使用代理</span>
+go env -w GOSUMDB=off
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">更换代理</span>
+go env -w GOPROXY=&quot;https://goproxy.io&quot;
+</code></pre>
+<p>【安装Gin】</p>
+<pre class="hljs"><code><span class="hljs-meta prompt_"># </span><span class="language-bash">go get 下载的包会在C:\user\你的用户名\go 里， -u 参数表示更新</span>
+go get -u github.com/gin-gonic/gin
+</code></pre>
+<h2>Gin的使用</h2>
+<pre class="hljs"><code><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/gin-gonic/gin&quot;</span>
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+	r := gin.Default()
+	r.GET(<span class="hljs-string">&quot;/ping&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(c *gin.Context)</span></span> {
+		c.JSON(<span class="hljs-number">200</span>, gin.H{
+			<span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;pong&quot;</span>,
+		})
+	})
+	r.Run() <span class="hljs-comment">// listen and serve on 0.0.0.0:8080</span>
+}
+</code></pre>

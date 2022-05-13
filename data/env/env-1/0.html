@@ -9,3 +9,6 @@
 <p>如果要将虚拟环境放置到指定位置需要使用到 <code>--prefix</code> 参数。如下的命令将会在<code>D:/environment/</code> 目录下创建一个名为Python的虚拟环境。</p>
 <pre class="hljs"><code>conda create --prefix=D:/environment/Python python=3.8
 </code></pre>
+<p>克隆一个虚拟环境</p>
+<pre class="hljs"><code>conda create -n env2 --clone env1 
+</code></pre>

@@ -1,15 +1,18 @@
-<h1>IRNet</h1>
+<h1>Complementary Parts Models</h1>
 <h2>基础信息</h2>
-<p>文章标题：Weakly Supervised Learning of Instance Segmentation with Inter-pixel Relations</p>
-<p>文章链接：<a href="http://arxiv.org/pdf/1904.05044">http://arxiv.org/pdf/1904.05044</a></p>
-<p>发表时间：2019-04 (CPVR 2019)</p>
+<p>文章标题：Weakly Supervised Complementary Parts Models for Fine-Grained Image Classification from the Bottom Up</p>
+<p>文章链接：<a href="https://arxiv.org/abs/1903.02827">https://arxiv.org/abs/1903.02827</a></p>
+<p>发表时间：2019-03-07</p>
 <h2>背景</h2>
+<p>本文主要：用图像级标签训练的深度神经网络只倾向于聚焦于discriminative parts（有识别力的部分），而忽略了其他object parts。</p>
 <h2>创新点简介</h2>
-<p><img src="../../../img/article/2022-03-24-11-04-21.png" alt=""></p>
-<p>本文使用全集标记，类激活图完成了实例分割任务。为解决类激活图无法区分实例，使用了pairwise semantic affinitie（成对语义相似关系）和lass-agnostic instance map (无类别实例映射)。(类不可知实例映射是一个粗糙的实例分割掩码，没有类标签，也没有精确的边界。另一方面，一对像素之间的语义亲和力是它们之间的类等价性的置信度。)</p>
+<p>本文以弱监督的方式建立互补局部模型（complementary parts model），以检索由卷积神经网络检测到的被domain object parts抑制的信息。</p>
+<p>(1) 采用基于MASK R-CNN和CRF的分割方法，通过弱监督对象检测和实例分割，提取粗糙的实例掩码。</p>
+<p>(2) 估计并搜索每个对象实例的最佳Part Model，Part Model是指包含了所有或者部分目标的区域。Part Model的选择有两个基本准则。首先，每一个Part Model包含足够多的discriminative 部分。第二，每对part pairs之间的不同应该尽可能的大。</p>
+<p>(3) 构建双向长短期记忆（LSTM）网络，将这些互补部分的part信息融合并编码成图像分类的综合特征</p>
 <h2>详细内容</h2>
 <h3>模型结构</h3>
-<h3>pairwise semantic affinitie（成对语义相似关系）</h3>
-<p>通过成对语义关系可以对个体的边缘进行判断。也即从图像中任意选取两个像素，当这两个像素属于不同的类别时，就认为他们之间存在一条边界</p>
-<h3>lass-agnostic instance map (无类别实例映射)</h3>
-<p>预测每一个实例的重心（相对位置，且是个是矢量），表示该像素到预测重心的偏移。</p>
+<p>训练过程，从整体上分为3个部分。首先使用 Mask RCNN 和 CRF 获取粗糙的实例分割；粗糙的实例分割为Part Model的生成提供依据，最后让 Part Model 所在的特征之间，通过LSTM 交换信息，并通过全连接输出分类，这样就可以更新CNN对于非discriminative part的感知了。</p>
+<p><img src="../../../img/article/2022-05-07-20-00-27.png" alt=""></p>
+<p><img src="../../../img/article/2022-05-07-20-00-37.png" alt=""></p>
+<p><img src="../../../img/article/2022-05-07-20-00-46.png" alt=""></p>
