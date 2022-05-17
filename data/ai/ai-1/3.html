@@ -56,7 +56,7 @@
 <tr>
 <td>矩阵拼接</td>
 <td>torch.cat((a,b),dim=)</td>
-<td>矩阵拼接， 在第n个维度上进行拼接</td>
+<td>矩阵拼接， 在第n个维度上进行拼接，dim从0开始</td>
 </tr>
 <tr>
 <td>矩阵堆叠</td>
@@ -72,6 +72,16 @@
 <td>线性递增</td>
 <td>torch.arange(start, end, step)</td>
 <td>生成从start（包含）到end(不包含) 步长为step的线性tensor</td>
+</tr>
+<tr>
+<td>维度置换</td>
+<td>tensor.permute(0,1,3,2)</td>
+<td>将3和2 维度进行交换，x.permute(i).permute(i) = x</td>
+</tr>
+<tr>
+<td>改变维度</td>
+<td>tensor.reshape()</td>
+<td>reshape可以改变tensor的维度</td>
 </tr>
 </tbody>
 </table>
