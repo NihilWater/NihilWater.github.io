@@ -1,0 +1,35 @@
+<h1>微信小程序锚点跳转</h1>
+<p>本文将简单描述使用微信小程序完成锚点跳转的方法，在HTML中我们常常使用a标签跳转到指定的元素。那在没有a标签的微信小程序里应该如何实现呢？</p>
+<h2>案例说明</h2>
+<p>在微信中可以使用scroll-view组件实现页面锚点的跳转，scroll-view组件的属性中有一个叫做<code>scroll-into-view</code>的属性，当用户使用setData方法改变这个属性的属性值，scroll-view组件会自动将该元素滚动到可见区域。</p>
+<h2>案例</h2>
+<p>wxml 代码 ：</p>
+<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">scroll-view</span> <span class="hljs-attr">scroll-into-view</span>=<span class="hljs-string">&quot;{{toView}}&quot;</span> <span class="hljs-attr">scroll-y</span>=<span class="hljs-string">&quot;true&quot;</span> <span class="hljs-attr">scroll-with-animation</span>=<span class="hljs-string">&quot;true&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;m1&quot;</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">text</span>&gt;</span> 一 <span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">text</span>&gt;</span> 二 <span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">text</span>&gt;</span> 三 <span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">text</span>&gt;</span> 四 <span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">text</span>&gt;</span> 五 <span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">text</span>&gt;</span> 六 <span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">text</span>&gt;</span> 七 <span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">text</span>&gt;</span> 八 <span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">text</span>&gt;</span> 九 <span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">text</span>&gt;</span> 十 <span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">text</span>&gt;</span> 十一 <span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">text</span>&gt;</span> 十二 <span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">text</span>&gt;</span> 十三 <span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">scroll-view</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">bindtap</span>= <span class="hljs-string">&#x27;jumpTo&#x27;</span> <span class="hljs-attr">data-opt</span>=<span class="hljs-string">&quot;list0&quot;</span>&gt;</span>
+</code></pre>
+<p>js 代码：</p>
+<pre class="hljs"><code><span class="hljs-attr">data</span>: {
+    <span class="hljs-attr">toView</span>: <span class="hljs-string">&#x27;&#x27;</span>, 
+},
+
+<span class="hljs-attr">jumpTo</span>: <span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setData</span>({
+        <span class="hljs-attr">toView</span>: <span class="hljs-string">&#x27;m1&#x27;</span>
+    })
+},
+</code></pre>
